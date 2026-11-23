@@ -20,7 +20,7 @@ function App({ctx}){
       .then(({data,error})=>{
         if(!alive) return;
         if(error||!data||data.error) setSubscriptionState("unverified");
-        else setSubscriptionState(data.has_subscription&&data.status==="active"?"active":"inactive");
+        else setSubscriptionState(data.exempt===true || (data.has_subscription&&data.status==="active") ? "active" : "inactive");
       }).catch(()=>{if(alive)setSubscriptionState("unverified");});
     return ()=>{alive=false;};
   },[real,ctx.company?.id,subscriptionState]);
