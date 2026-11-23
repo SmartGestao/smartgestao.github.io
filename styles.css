@@ -1,6 +1,4 @@
-:root{--navy:#0b2447;--navy2:#13376b;--green:#16a34a;--greenbg:#dcfce7;--bg:#f2f5fa;--card:#fff;--tx:#0f1b33;--mut:#5b6b86;--bd:#e0e6f0;--inp:#fff;--bad:#dc2626;--badbg:#fee2e2;--warn:#b45309;--warnbg:#fef3c7;--blue:#1d4ed8;--bluebg:#dbeafe;color-scheme:light}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1220;--card:#111d33;--tx:#e8eefb;--mut:#9aabc7;--bd:#22324f;--inp:#0d1829;--greenbg:#12351f;--badbg:#3b1616;--warnbg:#3a2a0c;--bluebg:#16264f;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0a1220;--card:#111d33;--tx:#e8eefb;--mut:#9aabc7;--bd:#22324f;--inp:#0d1829;--greenbg:#12351f;--badbg:#3b1616;--warnbg:#3a2a0c;--bluebg:#16264f;color-scheme:dark}
+:root{--navy:#344256;--navy2:#475569;--green:#64748b;--greenbg:#e8edf2;--bg:#f5f6f8;--card:#fff;--tx:#273444;--mut:#667085;--bd:#e4e7ec;--inp:#fff;--bad:#dc2626;--badbg:#fee2e2;--warn:#b45309;--warnbg:#fef3c7;--blue:#536b84;--bluebg:#e7edf3;color-scheme:light}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -21,8 +19,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top{display:none}
 .scrim{display:none}
 h1{font-size:24px;margin:0 0 2px;color:var(--navy)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) h1{color:#fff}}
-:root[data-theme="dark"] h1{color:#fff}
 .sub{color:var(--mut);margin:0 0 18px}
 .head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:6px}
 .btn{background:var(--green);color:#fff;border:0;padding:10px 16px;border-radius:10px;font-weight:600;cursor:pointer}
@@ -97,3 +93,245 @@ td.ac::before{content:none}
 .sfoot b{display:block;color:#fff;margin-bottom:4px}
 .sfoot button{background:none;border:1px solid #3a5a8f;color:#dbe6fa;border-radius:8px;padding:5px 10px;margin:8px 6px 0 0;cursor:pointer;font-size:12px}
 .soon{padding:36px 20px;text-align:center}
+
+/* Ajuste visual completo: interface clara e neutra */
+.side{background:#ffffff;color:#273444;border-right:1px solid #e4e7ec;box-shadow:2px 0 12px rgba(16,24,40,.04)}
+.logo{color:#273444}
+.logo i{background:#e7edf3;color:#344256}
+.nav button{color:#475467}
+.nav button:hover{background:#f2f4f7}
+.nav button.on{background:#e7edf3;color:#344256}
+.sfoot{color:#667085;border-top:1px solid #e4e7ec}
+.sfoot b{color:#273444}
+.sfoot button{border-color:#d0d5dd;color:#475467}
+.auth{background:#f5f6f8}
+.top{background:#ffffff;color:#273444;border-bottom:1px solid #e4e7ec}
+.top button{color:#344256}
+@media(max-width:900px){
+.side{background:#ffffff}
+body::before{background:#ffffff}
+}
+
+
+/* Login profissional SmartGestão */
+.auth-login{display:grid;grid-template-columns:minmax(280px,1fr) minmax(420px,1fr);padding:0;background:#f3f5f7;min-height:100vh}
+.auth-showcase{position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:clamp(32px,6vw,84px);color:#fff;background:radial-gradient(circle at 78% 24%,rgba(123,157,160,.34),transparent 34%),linear-gradient(145deg,#263747 0%,#344b5b 58%,#415d68 100%)}
+.auth-showcase:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-190px;bottom:8%;box-shadow:0 0 0 48px rgba(255,255,255,.025),0 0 0 96px rgba(255,255,255,.02)}
+.brand-lockup{display:flex;align-items:center;gap:13px;position:relative;z-index:1;color:inherit}
+.brand-symbol{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(145deg,#a9c6c1,#d7e5df);color:#263e49;box-shadow:0 8px 22px rgba(0,0,0,.15)}
+.brand-symbol svg{width:39px;height:39px}
+.brand-name{font-size:25px;font-weight:800;letter-spacing:-1px;line-height:1.05}
+.brand-name>span{color:#b9d4ca}
+.brand-name small{display:block;margin-top:6px;font-size:9px;letter-spacing:2px;font-weight:700;opacity:.72}
+.showcase-copy{position:relative;z-index:1;max-width:520px;margin:60px 0}
+.showcase-copy .eyebrow,.auth-kicker{font-size:10px;font-weight:800;letter-spacing:2px}
+.showcase-copy .eyebrow{color:#c0d8cf}
+.showcase-copy h1{color:#fff;font-size:clamp(36px,4.4vw,62px);line-height:1.08;letter-spacing:-2px;margin:20px 0}
+.showcase-copy p{max-width:430px;color:rgba(255,255,255,.78);font-size:17px;line-height:1.8}
+.showcase-foot{position:relative;z-index:1;color:rgba(255,255,255,.58);font-size:10px;letter-spacing:1.8px;font-weight:700}
+.auth-panel{display:grid;place-items:center;padding:36px}
+.auth-card{width:100%;max-width:440px!important;padding:clamp(26px,4vw,42px)!important;border:1px solid #e5e9ed;box-shadow:0 22px 65px rgba(36,52,67,.09);border-radius:22px!important}
+.auth-card-brand{display:none}
+.auth-card .brand-lockup{color:#2d4050;margin-bottom:30px}
+.auth-card .brand-symbol{width:44px;height:44px;border-radius:13px;background:#e3eeea;box-shadow:none}
+.auth-card .brand-symbol svg{width:33px;height:33px}
+.auth-card .brand-name{font-size:21px}
+.auth-card .brand-name small{font-size:8px}
+.auth-kicker{display:block;color:#71847f;margin-bottom:9px}
+.auth-card h2{font-size:29px;letter-spacing:-.8px;line-height:1.2;margin:0 0 9px;color:#263747}
+.auth-intro{color:#78838d;font-size:14px;line-height:1.6;margin:0 0 27px}
+.auth-card .fld{margin-bottom:18px}
+.auth-card .fld label{font-weight:650;color:#43515d}
+.auth-card .fld input{height:48px;border-radius:11px;border-color:#dce2e7;padding:0 14px;transition:border-color .2s,box-shadow .2s}
+.auth-card .fld input:focus{outline:none;border-color:#789b91;box-shadow:0 0 0 3px rgba(120,155,145,.14)}
+.auth-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.auth-label-row label{margin:0!important}
+.auth-text-button,.auth-switch button{border:0;background:none;padding:0;color:#547d73;font-weight:700;font-size:12px;cursor:pointer}
+.auth-submit{margin-top:24px}
+.auth-card .auth-submit .btn{height:49px;border-radius:11px;background:linear-gradient(110deg,#405b66,#547b73);box-shadow:0 8px 18px rgba(64,91,102,.18);font-size:14px}
+.auth-card .auth-submit .btn:disabled{opacity:.65}
+.auth-switch{text-align:center;color:#7a858e;font-size:13px;margin-top:20px}
+.auth-switch button{font-size:13px;margin-left:4px}
+.auth-divider{display:flex;align-items:center;gap:12px;color:#a2abb2;font-size:10px;font-weight:700;margin:24px 0 16px}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e9edf0;flex:1}
+.demo-link{width:100%;height:46px;border:1px solid #dfe6e5;background:#f8faf9;color:#435e59;border-radius:11px;font-weight:650;cursor:pointer}
+.demo-link span{font-size:17px;margin-right:6px}
+.auth-secure{text-align:center;color:#9aa4aa;font-size:10px;margin-top:23px;letter-spacing:.2px}
+.auth-secure span{color:#6e9a88;font-size:9px;margin-right:5px}
+.auth-message{padding:10px 12px;border-radius:9px;background:#fff5f4}
+.auth-card .lnk{margin-top:18px}
+.auth-recovery-panel{grid-column:1/-1;min-height:100vh}
+.auth-recovery-panel .auth-card{max-width:440px!important}
+@media(max-width:760px){
+.auth-login{display:block;padding:0;background:#f3f5f7}
+.auth-showcase{display:none}
+.auth-panel{min-height:100vh;padding:22px 16px;align-content:center}
+.auth-card{max-width:460px!important;padding:30px 24px!important}
+.auth-card-brand{display:block}
+.auth-card .brand-lockup{margin-bottom:27px}
+.auth-recovery-panel{min-height:100vh}
+}
+
+
+/* SmartGestão — login profissional */
+.auth-login{display:grid;grid-template-columns:minmax(280px,1fr) minmax(420px,1fr);padding:0;background:#f3f5f7;min-height:100vh}
+.auth-showcase{position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:clamp(32px,6vw,84px);color:#fff;background:radial-gradient(circle at 78% 24%,rgba(123,157,160,.34),transparent 34%),linear-gradient(145deg,#263747 0%,#344b5b 58%,#415d68 100%)}
+.auth-showcase:after{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-190px;bottom:8%;box-shadow:0 0 0 48px rgba(255,255,255,.025),0 0 0 96px rgba(255,255,255,.02)}
+.brand-lockup{display:flex;align-items:center;gap:13px;position:relative;z-index:1;color:inherit}
+.brand-symbol{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:linear-gradient(145deg,#a9c6c1,#d7e5df);color:#263e49;box-shadow:0 8px 22px rgba(0,0,0,.15)}
+.brand-symbol svg{width:39px;height:39px}
+.brand-name{font-size:25px;font-weight:800;letter-spacing:-1px;line-height:1.05}
+.brand-name>span{color:#b9d4ca}
+.brand-name small{display:block;margin-top:6px;font-size:9px;letter-spacing:2px;font-weight:700;opacity:.72}
+.showcase-copy{position:relative;z-index:1;max-width:520px;margin:60px 0}
+.showcase-copy .eyebrow,.auth-kicker{font-size:10px;font-weight:800;letter-spacing:2px}
+.showcase-copy .eyebrow{color:#c0d8cf}
+.showcase-copy h1{color:#fff;font-size:clamp(36px,4.4vw,62px);line-height:1.08;letter-spacing:-2px;margin:20px 0}
+.showcase-copy p{max-width:430px;color:rgba(255,255,255,.78);font-size:17px;line-height:1.8}
+.showcase-foot{position:relative;z-index:1;color:rgba(255,255,255,.58);font-size:10px;letter-spacing:1.8px;font-weight:700}
+.auth-panel{display:grid;place-items:center;padding:36px}
+.auth-card{width:100%;max-width:440px!important;padding:clamp(26px,4vw,42px)!important;border:1px solid #e5e9ed;box-shadow:0 22px 65px rgba(36,52,67,.09);border-radius:22px!important}
+.auth-card-brand{display:none}
+.auth-card .brand-lockup{color:#2d4050;margin-bottom:30px}
+.auth-card .brand-symbol{width:44px;height:44px;border-radius:13px;background:#e3eeea;box-shadow:none}
+.auth-card .brand-symbol svg{width:33px;height:33px}
+.auth-card .brand-name{font-size:21px}
+.auth-card .brand-name small{font-size:8px}
+.auth-kicker{display:block;color:#71847f;margin-bottom:9px}
+.auth-card h2{font-size:29px;letter-spacing:-.8px;line-height:1.2;margin:0 0 9px;color:#263747}
+.auth-intro{color:#78838d;font-size:14px;line-height:1.6;margin:0 0 27px}
+.auth-card .fld{margin-bottom:18px}
+.auth-card .fld label{font-weight:650;color:#43515d}
+.auth-card .fld input{height:48px;border-radius:11px;border-color:#dce2e7;padding:0 14px;transition:border-color .2s,box-shadow .2s}
+.auth-card .fld input:focus{outline:none;border-color:#789b91;box-shadow:0 0 0 3px rgba(120,155,145,.14)}
+.auth-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.auth-label-row label{margin:0!important}
+.auth-text-button,.auth-switch button{border:0;background:none;padding:0;color:#547d73;font-weight:700;font-size:12px;cursor:pointer}
+.auth-submit{margin-top:24px}
+.auth-card .auth-submit .btn{height:49px;border-radius:11px;background:linear-gradient(110deg,#405b66,#547b73);box-shadow:0 8px 18px rgba(64,91,102,.18);font-size:14px}
+.auth-card .auth-submit .btn:disabled{opacity:.65}
+.auth-switch{text-align:center;color:#7a858e;font-size:13px;margin-top:20px}
+.auth-switch button{font-size:13px;margin-left:4px}
+.auth-divider{display:flex;align-items:center;gap:12px;color:#a2abb2;font-size:10px;font-weight:700;margin:24px 0 16px}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e9edf0;flex:1}
+.demo-link{width:100%;height:46px;border:1px solid #dfe6e5;background:#f8faf9;color:#435e59;border-radius:11px;font-weight:650;cursor:pointer}
+.demo-link span{font-size:17px;margin-right:6px}
+.auth-secure{text-align:center;color:#9aa4aa;font-size:10px;margin-top:23px;letter-spacing:.2px}
+.auth-secure span{color:#6e9a88;font-size:9px;margin-right:5px}
+.auth-message{padding:10px 12px;border-radius:9px;background:#fff5f4}
+.auth-card .lnk{margin-top:18px}
+.auth-recovery-panel{grid-column:1/-1;min-height:100vh}
+.auth-recovery-panel .auth-card{max-width:440px!important}
+@media(max-width:760px){.auth-login{display:block;padding:0;background:#f3f5f7}.auth-showcase{display:none}.auth-panel{min-height:100vh;padding:22px 16px;align-content:center}.auth-card{max-width:460px!important;padding:30px 24px!important}.auth-card-brand{display:block}.auth-card .brand-lockup{margin-bottom:27px}.auth-recovery-panel{min-height:100vh}}
+
+
+/* ===== SmartGestão · experiência interna profissional ===== */
+:root{--navy:#263747;--navy2:#344b5b;--green:#557d73;--greenbg:#e7f0ec;--bg:#f4f6f8;--card:#fff;--tx:#273444;--mut:#74808c;--bd:#e5e9ee;--blue:#526f8b;--bluebg:#eaf0f6}
+.app{background:#f4f6f8}
+.side{width:264px;padding:22px 14px 16px;background:#fff;border-right:1px solid #e8edf0;box-shadow:5px 0 24px rgba(35,52,68,.035)}
+.logo{gap:12px;padding:2px 9px 30px;color:#293b49;font-size:18px;letter-spacing:-.5px}
+.logo i{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#e2eee9,#c9ddd4);color:#36584f;box-shadow:0 5px 14px rgba(55,91,79,.1)}
+.logo i svg{width:30px;height:30px}
+.logo>span{display:flex;flex-direction:column;line-height:1.1}
+.logo small{font-size:8px;letter-spacing:1.55px;color:#8b989e;margin-top:6px}
+.nav-caption{padding:0 12px 10px;color:#9aa4ad;font-size:9px;font-weight:800;letter-spacing:1.5px}
+.nav{gap:5px}
+.nav button{position:relative;min-height:46px;padding:8px 11px;border-radius:11px;color:#667481;font-size:13px;font-weight:600;gap:12px;transition:background .18s,color .18s}
+.nav button:hover{background:#f4f7f6;color:#344f49}
+.nav button.on{background:#eaf1ee;color:#345b50;box-shadow:inset 0 0 0 1px #e0ebe5}
+.nav-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#f3f5f6;font-size:15px;filter:saturate(.75)}
+.nav button.on .nav-icon{background:#dce9e2}
+.nav-label{flex:1}
+.nav-active{width:5px;height:5px;border-radius:50%;background:#5c8978}
+.side-bottom{margin-top:auto}
+.side-status{display:flex;align-items:center;gap:8px;margin:0 5px 13px;padding:10px 11px;border-radius:10px;background:#f6f8f7;color:#788780;font-size:10px;font-weight:650}
+.status-dot,.workspace-live i{width:7px;height:7px;border-radius:50%;background:#5da17d;box-shadow:0 0 0 3px #e4f1e9}
+.sfoot{margin:0;padding:14px 8px 2px;border-top:1px solid #edf0f2;color:#7a8791;font-size:11px}
+.sfoot b{font-size:12px;color:#344451;margin-bottom:5px}
+.user-email{display:block;max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#8b969e;font-size:10px}
+.account-actions{display:flex;gap:6px;flex-wrap:wrap}
+.sfoot button{margin:10px 5px 0 0;padding:6px 9px;border-radius:7px;background:#fff;border:1px solid #e2e7ea;color:#617078;font-size:10px}
+.main{margin-left:264px;padding:0 32px 60px;min-width:0}
+.workspace-top{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #e8edf0;background:rgba(255,255,255,.72);margin:0 -32px;padding:12px 32px}
+.workspace-left{display:flex;align-items:center;gap:12px}
+.workspace-overline{display:block;color:#9aa5ad;font-size:9px;font-weight:800;letter-spacing:1.4px}
+.workspace-title{font-size:17px;font-weight:750;letter-spacing:-.35px;color:#2d3e4b;margin-top:3px}
+.workspace-meta{display:flex;align-items:center;gap:18px}
+.workspace-live{display:flex;align-items:center;gap:8px;color:#77847f;font-size:10px;font-weight:650}
+.workspace-live i{display:inline-block}
+.workspace-company{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 12px;border:1px solid #e8edef;border-radius:9px;background:#fff;color:#53616b;font-size:11px;font-weight:650}
+.workspace-content{padding-top:28px}
+.mobile-menu{display:none}
+.workspace-content h1{font-size:25px;letter-spacing:-.8px;color:#293b49}
+.workspace-content>.sub{font-size:13px;margin:4px 0 22px}
+.card{border-color:#e8edf0;border-radius:15px;box-shadow:0 3px 12px rgba(32,49,64,.025);transition:box-shadow .18s,border-color .18s}
+.card:hover{border-color:#dce5e2;box-shadow:0 7px 22px rgba(32,49,64,.055)}
+.kpi{border-left:0;position:relative;overflow:hidden;padding:19px 20px}
+.kpi:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#71988b}
+.kpi.b:before{background:#7189a1}.kpi.w:before{background:#d5a65c}.kpi.r:before{background:#c77c7c}
+.kpi small{font-size:11px;font-weight:650;letter-spacing:.15px}
+.kpi b{font-size:26px;letter-spacing:-.8px;color:#2e414d;margin-top:7px}
+.grid{gap:16px;margin-bottom:18px}
+.two{gap:16px}
+.card h3{color:#344653;font-size:14px;letter-spacing:-.15px}
+.bar{gap:12px;margin:12px 0;color:#65727d}
+.bar div{height:8px;background:#f0f3f4}
+.bar div i{background:linear-gradient(90deg,#73998c,#a4beb2)}
+.btn{background:#52796f;border-radius:9px;box-shadow:0 2px 5px rgba(54,91,79,.1)}
+.btn.g{box-shadow:none}
+.tools input,.fld input,.fld select,.fld textarea{border-color:#e1e7eb;border-radius:9px}
+.chip{border-radius:9px}
+.chip.on{background:#344b5b;border-color:#344b5b}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.65px;background:#fafbfc}
+td{font-size:12px}
+.tw{border-radius:15px}
+@media(max-width:900px){
+.side{width:280px;top:0;padding-top:calc(20px + env(safe-area-inset-top,0px))}
+.main{margin-left:0;padding:0 16px 48px}
+.workspace-top{min-height:72px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 -16px;padding:10px 16px;background:rgba(255,255,255,.96);backdrop-filter:blur(12px)}
+.workspace-overline{font-size:8px}
+.workspace-title{font-size:15px}
+.mobile-menu{display:grid;place-items:center;width:36px;height:36px;border:1px solid #e8edef;border-radius:10px;background:#fff;color:#425b55;font-size:18px}
+.workspace-meta{gap:8px}
+.workspace-live{display:none}
+.workspace-company{max-width:125px;padding:7px 9px;font-size:9px}
+.workspace-content{padding-top:22px}
+.workspace-content h1{font-size:22px}
+.grid{gap:10px}
+.kpi{padding:15px 13px}
+.kpi b{font-size:20px}
+.card{border-radius:13px}
+}
+@media(max-width:390px){.workspace-company{max-width:100px}.workspace-overline{letter-spacing:.8px}.grid{gap:8px}}
+
+
+/* ===== Assinatura SmartGestão ===== */
+.subscription-page{max-width:920px;margin:0 auto}
+.sub-heading{margin-bottom:20px}
+.sub-heading h1{margin:5px 0 3px}
+.sub-plan,.sub-status-card,.sub-form{padding:22px 24px;margin-bottom:16px;background:#fff}
+.sub-plan-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.sub-kicker{font-size:9px;font-weight:800;letter-spacing:1.5px;color:#6d8b80}
+.sub-plan h2{margin:7px 0 6px;font-size:23px;color:#2d4050}
+.sub-plan p{margin:0;color:#7b8790;font-size:13px;line-height:1.6}
+.sub-price{text-align:right;white-space:nowrap}
+.sub-price strong{display:block;color:#345b50;font-size:28px;letter-spacing:-1px}
+.sub-price span{display:block;color:#87929a;font-size:11px;margin-top:2px}
+.sub-includes{display:flex;gap:12px 24px;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:1px solid #edf0f2;color:#61736c;font-size:11px;font-weight:600}
+.sub-status-card h3,.sub-form h3{margin:0 0 13px;color:#344653;font-size:15px}
+.sub-status-card>p{display:flex;align-items:center;gap:9px;margin:0 0 9px;color:#4c5e68;font-size:13px}
+.sub-status-dot{width:8px;height:8px;border-radius:50%;background:#aab3ba;display:inline-block}
+.sub-status-dot.pending{background:#d49a45;box-shadow:0 0 0 3px #fbf1df}
+.sub-status-dot.active{background:#4e9b73;box-shadow:0 0 0 3px #e4f2e9}
+.sub-pay-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;margin-top:8px;padding:11px 16px}
+.sub-form>p{margin:0 0 18px}
+.sub-form .fld{margin-bottom:13px}
+.sub-form .btn{margin-top:8px}
+.sub-note{font-size:10px;color:#98a2aa;margin:12px 0 0}
+@media(max-width:600px){
+.sub-plan,.sub-status-card,.sub-form{padding:18px 16px}
+.sub-plan-top{gap:12px}
+.sub-plan h2{font-size:20px}
+.sub-price strong{font-size:23px}
+.sub-includes{display:grid;gap:9px}
+}
