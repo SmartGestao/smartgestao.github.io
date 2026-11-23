@@ -95,7 +95,28 @@ Deno.serve(async (req) => {
       return json({ error: "Somente o proprietário ou administrador pode gerenciar a assinatura." }, 403);
     }
 
-    if (body.action === "status") {
+    if (body.action === "status") {   
+      const { data: exemption, error: exemptionError } = await admin
+      .from("company_subscription_exemptions")
+      .select("company_id")
+      .eq("company_id", companyId)
+      .maybeSingle();
+
+    if (exemptionError) {
+      console.error("Erro ao verificar isenção:", exemptionError.message);
+      return json({ error: "Não foi possível verificar o acesso da empresa." }, 500);
+    }
+
+    if (exemption) {
+      return json({
+        has_subscription: true,
+        exempt: true,
+        status: "active",
+        amount: null,
+        next_due_date: null,
+        payment_url: null
+      });
+    }
       const { data: saved, error: statusError } = await admin
         .from("company_subscriptions")
         .select("status, amount, next_due_date, asaas_subscription_id")
