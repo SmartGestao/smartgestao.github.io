@@ -1,9 +1,11 @@
 
 // ARQUIVO: app.jsx — menu, telas, regras de negócio e inicialização
+
 /* ============ APLICAÇÃO ============ */
 
 const MENU = [
   ["dashboard","📊","Painel"],
+  ["empresa","🏢","Dados da empresa"],
   ["ordens","🛠️","Ordens de serviço"],
   ["garantias","🛡️","Garantias"],
   ["clientes","👥","Clientes"],
@@ -114,7 +116,39 @@ function App({ctx}){
       :<div className="empty">Carregando…</div>;
   }
 
+  /* ============ SALVAR DADOS ============ */
+
   const upsert=async(tab,r)=>{
+    // Perfil da empresa: registro único por empresa
+    if(tab==="perfilEmpresa"){
+      if(!real){
+        const perfil={
+          ...r,
+          id:r.id||uid()
+        };
+
+        setDb(d=>({
+          ...d,
+          perfilEmpresa:perfil
+        }));
+
+        return;
+      }
+
+      const salvo=await R.save(
+        "perfilEmpresa",
+        r,
+        ctx.company.id
+      );
+
+      setDb(d=>({
+        ...d,
+        perfilEmpresa:salvo
+      }));
+
+      return;
+    }
+
     if(!real){
       return setDb(d=>({
         ...d,
@@ -364,13 +398,29 @@ function App({ctx}){
     );
   };
 
-  /* ============ CERTIFICADO DE GARANTIA EM PDF ============ */
+  /* ============ CERTIFICADO DE GARANTIA ============ */
 
   const gerarCertificadoPDF = r => {
     const cliente = db.clientes.find(c => c.id === r.clienteId) || {};
     const equipamento = db.equipamentos.find(e => e.id === r.equipamentoId) || {};
     const ordem = db.ordens.find(o => o.id === r.osId) || {};
-    const empresa = ctx.company?.name || "Assistência técnica";
+
+    const perfil=db.perfilEmpresa||{};
+
+    const empresa=
+      perfil.nomeFantasia||
+      perfil.razaoSocial||
+      ctx.company?.name||
+      "Assistência técnica";
+
+    const endereco=[
+      perfil.rua,
+      perfil.numero,
+      perfil.complemento,
+      perfil.bairro,
+      perfil.cidade,
+      perfil.estado
+    ].filter(Boolean).join(", ");
 
     const esc = v => String(v ?? "—").replace(/[&<>"']/g, c => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;",
@@ -405,9 +455,11 @@ function App({ctx}){
       '.field{font-size:12px;color:#64748b}',
       '.field b{display:block;color:#1f2937;font-size:14px;margin-top:5px}',
       '.terms{font-size:13px;line-height:1.6;white-space:pre-wrap}',
-      '.top{display:flex;justify-content:space-between;border-bottom:3px solid #183b63;padding-bottom:20px}',
+      '.top{display:flex;justify-content:space-between;border-bottom:3px solid #183b63;padding-bottom:20px;gap:20px}',
       '.brand{font-size:22px;font-weight:bold;color:#183b63}',
-      '.number{text-align:right;font-size:12px}',
+      '.company-info{font-size:11px;line-height:1.6;color:#475569;margin-top:8px}',
+      '.logo{max-width:110px;max-height:65px;object-fit:contain;margin-bottom:8px}',
+      '.number{text-align:right;font-size:12px;min-width:130px}',
       'button{display:block;margin:0 auto 20px;padding:12px 20px;background:#183b63;color:white;border:0;border-radius:6px;cursor:pointer}',
       '.sign{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:70px;text-align:center;font-size:12px}',
       '.line{border-top:1px solid #555;padding-top:8px}',
@@ -419,7 +471,21 @@ function App({ctx}){
       '<button onclick="window.print()">Imprimir / Salvar como PDF</button>',
       '<main class="doc">',
       '<div class="top">',
-      '<div><div class="brand">' + esc(empresa) + '</div>Certificado de garantia de serviço</div>',
+      '<div>',
+      perfil.logoUrl?'<img class="logo" src="'+esc(perfil.logoUrl)+'" alt="Logotipo">':'',
+      '<div class="brand">' + esc(empresa) + '</div>',
+      '<div class="company-info">',
+      perfil.razaoSocial&&perfil.nomeFantasia
+        ?'Razão social: '+esc(perfil.razaoSocial)+'<br>':'',
+      perfil.documento?'CNPJ/CPF: '+esc(perfil.documento)+'<br>':'',
+      endereco?esc(endereco)+'<br>':'',
+      perfil.cep?'CEP: '+esc(perfil.cep)+'<br>':'',
+      perfil.telefone?'Telefone: '+esc(perfil.telefone)+'<br>':'',
+      perfil.whatsapp?'WhatsApp: '+esc(perfil.whatsapp)+'<br>':'',
+      perfil.email?esc(perfil.email):'',
+      '</div>',
+      '<p style="font-size:12px;margin-bottom:0">Certificado de garantia de serviço</p>',
+      '</div>',
       '<div class="number">CERTIFICADO<strong><br>' + esc(r.numeroCertificado) + '</strong></div>',
       '</div>',
       '<h1>CERTIFICADO DE GARANTIA</h1>',
@@ -427,6 +493,7 @@ function App({ctx}){
       '<div class="grid">',
       '<div class="field">Cliente<b>' + esc(cliente.nome) + '</b></div>',
       '<div class="field">Telefone<b>' + esc(cliente.telefone || cliente.whatsapp || "Não informado") + '</b></div>',
+      '<div class="field">CPF/CNPJ<b>' + esc(cliente.documento || "Não informado") + '</b></div>',
       '</div>',
       '<h2>EQUIPAMENTO E SERVIÇO</h2>',
       '<div class="grid">',
@@ -434,6 +501,7 @@ function App({ctx}){
       '<div class="field">Equipamento<b>' + esc((equipamento.marca || "") + " " + (equipamento.modelo || "")) + '</b></div>',
       '<div class="field">Tipo<b>' + esc(equipamento.tipo) + '</b></div>',
       '<div class="field">Técnico<b>' + esc(ordem.tecnico) + '</b></div>',
+      '<div class="field">Valor do serviço<b>' + esc(typeof brl==="function"?brl(ordem.orcamento):"Não informado") + '</b></div>',
       '</div>',
       '<h2>PRAZO E VALIDADE</h2>',
       '<div class="grid">',
@@ -471,6 +539,56 @@ function App({ctx}){
     dashboard:<Dashboard db={db} go={go}/>,
 
     assinatura:<SubscriptionScreen ctx={ctx}/>,
+
+    empresa:(
+      <Crud
+        title="Dados da empresa"
+        sub="Cadastre os dados da assistência. Eles serão utilizados automaticamente nos certificados de garantia."
+        label="perfil da empresa"
+        newLabel="Cadastrar dados da empresa"
+        rows={db.perfilEmpresa?[db.perfilEmpresa]:[]}
+        defaults={{
+          razaoSocial:"",
+          nomeFantasia:"",
+          documento:"",
+          telefone:"",
+          whatsapp:"",
+          email:"",
+          cep:"",
+          rua:"",
+          numero:"",
+          complemento:"",
+          bairro:"",
+          cidade:"",
+          estado:"",
+          logoUrl:""
+        }}
+        fields={[
+          {k:"razaoSocial",l:"Razão social",w:1},
+          {k:"nomeFantasia",l:"Nome fantasia",w:1},
+          {k:"documento",l:"CNPJ / CPF"},
+          {k:"telefone",l:"Telefone",t:"tel"},
+          {k:"whatsapp",l:"WhatsApp",t:"tel"},
+          {k:"email",l:"E-mail",t:"email"},
+          {k:"cep",l:"CEP"},
+          {k:"rua",l:"Rua / Avenida",w:1},
+          {k:"numero",l:"Número"},
+          {k:"complemento",l:"Complemento"},
+          {k:"bairro",l:"Bairro"},
+          {k:"cidade",l:"Cidade"},
+          {k:"estado",l:"Estado"},
+          {k:"logoUrl",l:"URL do logotipo",w:1}
+        ]}
+        cols={[
+          {l:"Empresa",r:r=><b>{r.nomeFantasia||r.razaoSocial||"Empresa cadastrada"}</b>},
+          {l:"CNPJ / CPF",r:r=>r.documento||"—"},
+          {l:"Telefone",r:r=>r.telefone||"—"},
+          {l:"E-mail",r:r=>r.email||"—"}
+        ]}
+        onSave={r=>upsert("perfilEmpresa",r)}
+        onDel={()=>{}}
+      />
+    ),
 
     clientes:(
       <Crud
