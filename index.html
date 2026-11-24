@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -448,8 +447,7 @@
       font-size: 17px;
       font-family: "Manrope", sans-serif;
     }
-
-    .kpi em {
+        .kpi em {
       display: block;
       color: var(--green);
       font-size: 8px;
@@ -1287,7 +1285,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <!-- CABEÇALHO -->
@@ -1308,7 +1305,7 @@
 
       <div class="nav-actions">
         <a href="app.html" class="btn btn-outline">Acessar sistema</a>
-        <a href="app.html#demo" class="btn btn-primary">Conhecer o sistema ↗</a>
+        <a href="#sistema" class="btn btn-primary">Conhecer o sistema ↗</a>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menu">☰</button>
       </div>
 
@@ -1339,7 +1336,7 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="app.html#demo" class="btn btn-primary">
+            <a href="#sistema" class="btn btn-primary">
               Explorar demonstração <span>→</span>
             </a>
             <a href="#recursos" class="btn btn-outline">
@@ -1484,107 +1481,1081 @@
         </div>
       </div>
     </section>
+        <!-- DEMONSTRAÇÃO INTERATIVA PREMIUM -->
+    <style>
+      .premium-demo {
+        padding: 105px 0;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 15% 15%, rgba(34,214,154,.09), transparent 35%),
+          radial-gradient(ellipse at 90% 80%, rgba(67,140,255,.10), transparent 35%),
+          #081321;
+      }
 
-    <!-- DEMONSTRAÇÃO DO SISTEMA -->
-    <section class="section showcase" id="sistema">
+      .premium-heading {
+        max-width: 760px;
+        margin: 0 auto 45px;
+        text-align: center;
+      }
+
+      .premium-heading .section-title {
+        margin: 0 auto;
+      }
+
+      .premium-heading .section-description {
+        margin: 18px auto 0;
+      }
+
+      .premium-window {
+        position: relative;
+        width: min(1180px, 100%);
+        margin: auto;
+        padding: 9px;
+        border: 1px solid rgba(255,255,255,.14);
+        border-radius: 23px;
+        background: linear-gradient(145deg, #20364c, #0b1727 45%, #172c40);
+        box-shadow: 0 35px 100px rgba(0,0,0,.48), 0 0 70px rgba(34,214,154,.07);
+        animation: premiumEnter 1s both;
+      }
+
+      @keyframes premiumEnter {
+        from { opacity: 0; transform: translateY(35px) scale(.985); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .premium-browser {
+        height: 38px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 13px;
+      }
+
+      .premium-browser i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #52667c;
+      }
+
+      .premium-browser i:first-child { background: #ff6b70; }
+      .premium-browser i:nth-child(2) { background: #f7c65d; }
+      .premium-browser i:nth-child(3) { background: #39d89e; }
+
+      .premium-address {
+        width: min(360px, 55%);
+        margin: 0 auto;
+        padding: 5px 12px;
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 7px;
+        background: rgba(0,0,0,.18);
+        color: #8294a9;
+        text-align: center;
+        font-size: 9px;
+      }
+
+      .premium-app {
+        min-height: 620px;
+        display: grid;
+        grid-template-columns: 218px minmax(0,1fr);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 15px;
+        background: #0b1726;
+      }
+
+      .premium-sidebar {
+        display: flex;
+        flex-direction: column;
+        padding: 21px 13px;
+        border-right: 1px solid rgba(255,255,255,.07);
+        background: #0d1b2b;
+      }
+
+      .premium-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 8px 24px;
+        border-bottom: 1px solid rgba(255,255,255,.07);
+      }
+
+      .premium-brand-icon {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        color: #062016;
+        font-weight: 900;
+        background: linear-gradient(135deg,#52f0ba,#13b982);
+        box-shadow: 0 5px 18px rgba(34,214,154,.2);
+      }
+
+      .premium-brand strong {
+        display: block;
+        color: #f4f8ff;
+        font-family: Manrope,sans-serif;
+        font-size: 14px;
+      }
+
+      .premium-brand small {
+        display: block;
+        color: #71869e;
+        font-size: 9px;
+      }
+
+      .premium-nav-label {
+        padding: 22px 10px 9px;
+        color: #61768e;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+      }
+
+      .premium-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .premium-nav button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 11px 12px;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        color: #9aacc0;
+        background: transparent;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: .25s;
+      }
+
+      .premium-nav button:hover {
+        color: #fff;
+        background: rgba(255,255,255,.045);
+      }
+
+      .premium-nav button.active {
+        color: #73edc0;
+        border-color: rgba(34,214,154,.15);
+        background: linear-gradient(90deg,rgba(34,214,154,.14),rgba(34,214,154,.045));
+        box-shadow: inset 3px 0 #29d99e;
+      }
+
+      .premium-nav-icon {
+        width: 18px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .premium-side-bottom {
+        margin-top: auto;
+        padding: 13px 10px 0;
+      }
+
+      .premium-profile {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255,255,255,.07);
+      }
+
+      .premium-avatar {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: #09251d;
+        background: linear-gradient(135deg,#7cf0c6,#3b9cff);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .premium-profile strong {
+        display: block;
+        color: #dce7f2;
+        font-size: 10px;
+      }
+
+      .premium-profile small {
+        display: block;
+        color: #71869e;
+        font-size: 9px;
+      }
+
+      .premium-main {
+        min-width: 0;
+        padding: 23px;
+        background:
+          radial-gradient(ellipse at 90% 0%,rgba(67,140,255,.055),transparent 35%),
+          #0b1726;
+      }
+
+      .premium-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+
+      .premium-breadcrumb {
+        color: #7388a0;
+        font-size: 10px;
+      }
+
+      .premium-breadcrumb strong {
+        color: #eaf2fa;
+        font-size: 12px;
+      }
+
+      .premium-top-actions {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .premium-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 9px;
+        border: 1px solid rgba(34,214,154,.16);
+        border-radius: 20px;
+        color: #70e8ba;
+        background: rgba(34,214,154,.07);
+        font-size: 9px;
+      }
+
+      .premium-live::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #27d99b;
+        box-shadow: 0 0 9px #27d99b;
+        animation: livePulse 1.8s infinite;
+      }
+
+      @keyframes livePulse {
+        50% { opacity: .35; box-shadow: 0 0 2px #27d99b; }
+      }
+
+      .premium-icon-button {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 8px;
+        color: #a9bbcd;
+        background: rgba(255,255,255,.035);
+        cursor: pointer;
+        transition: .2s;
+      }
+
+      .premium-icon-button:hover {
+        color: #6de8b9;
+        border-color: rgba(34,214,154,.4);
+      }
+
+      .premium-welcome {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .premium-welcome small {
+        display: block;
+        margin-bottom: 5px;
+        color: #7f94aa;
+        font-size: 10px;
+      }
+
+      .premium-welcome h3 {
+        color: #f4f8ff;
+        font-family: Manrope,sans-serif;
+        font-size: clamp(18px,2vw,23px);
+        letter-spacing: -.7px;
+      }
+
+      .premium-welcome p {
+        margin-top: 4px;
+        color: #8195aa;
+        font-size: 10px;
+      }
+
+      .premium-date {
+        padding: 8px 11px;
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 8px;
+        color: #9aacc0;
+        background: rgba(255,255,255,.025);
+        font-size: 9px;
+        white-space: nowrap;
+      }
+
+      .premium-kpis {
+        display: grid;
+        grid-template-columns: repeat(4,minmax(0,1fr));
+        gap: 11px;
+        margin-bottom: 14px;
+      }
+
+      .premium-kpi {
+        position: relative;
+        overflow: hidden;
+        min-width: 0;
+        padding: 15px;
+        border: 1px solid rgba(255,255,255,.075);
+        border-radius: 12px;
+        background: linear-gradient(145deg,rgba(24,44,65,.95),rgba(15,29,46,.95));
+        transition: transform .25s,border-color .25s;
+      }
+
+      .premium-kpi:hover {
+        transform: translateY(-4px);
+        border-color: rgba(34,214,154,.3);
+      }
+
+      .premium-kpi::after {
+        content: "";
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        right: -35px;
+        top: -40px;
+        border-radius: 50%;
+        background: rgba(34,214,154,.10);
+        filter: blur(15px);
+      }
+
+      .premium-kpi-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        color: #91a4b9;
+        font-size: 9px;
+      }
+
+      .premium-kpi-icon {
+        color: #5de5b4;
+        font-size: 13px;
+      }
+
+      .premium-kpi strong {
+        display: block;
+        margin-top: 11px;
+        color: #f5f8fc;
+        font-family: Manrope,sans-serif;
+        font-size: clamp(17px,2vw,23px);
+        letter-spacing: -.8px;
+      }
+
+      .premium-kpi-foot {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 7px;
+        color: #4ed9a8;
+        font-size: 8px;
+      }
+
+      .premium-kpi-foot.muted {
+        color: #7f94aa;
+      }
+
+      .premium-content-grid {
+        display: grid;
+        grid-template-columns: minmax(0,1.55fr) minmax(190px,.85fr);
+        gap: 13px;
+        margin-bottom: 13px;
+      }
+
+      .premium-card {
+        min-width: 0;
+        padding: 16px;
+        border: 1px solid rgba(255,255,255,.075);
+        border-radius: 12px;
+        background: linear-gradient(145deg,rgba(21,39,59,.88),rgba(13,27,43,.94));
+      }
+
+      .premium-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .premium-card-head strong {
+        color: #e8f0f8;
+        font-size: 10px;
+      }
+
+      .premium-card-head span {
+        color: #7890a8;
+        font-size: 8px;
+      }
+
+      .premium-chart {
+        height: 145px;
+        display: flex;
+        align-items: end;
+        justify-content: space-around;
+        gap: 9px;
+        padding: 0 4px;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        background: repeating-linear-gradient(to bottom,transparent 0 35px,rgba(255,255,255,.045) 36px);
+      }
+
+      .premium-chart-column {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        gap: 3px;
+      }
+
+      .premium-chart-column i {
+        display: block;
+        width: min(13px,42%);
+        min-height: 5px;
+        border-radius: 4px 4px 0 0;
+        transform-origin: bottom;
+        animation: premiumGrow 1.2s cubic-bezier(.2,.8,.2,1) both;
+      }
+
+      .premium-chart-column i:first-child {
+        background: linear-gradient(180deg,#42e6b0,#138d70);
+      }
+
+      .premium-chart-column i:last-child {
+        background: linear-gradient(180deg,#4d9cff,#2762b8);
+        opacity: .85;
+      }
+
+      @keyframes premiumGrow {
+        from { transform: scaleY(.04); opacity: .2; }
+        to { transform: scaleY(1); opacity: 1; }
+      }
+
+      .premium-chart-labels {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 8px;
+        color: #72879e;
+        font-size: 8px;
+      }
+
+      .premium-status-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .premium-status-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #a9b9ca;
+        font-size: 9px;
+      }
+
+      .premium-status-name {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .premium-status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #36dca6;
+      }
+
+      .premium-status-item:nth-child(2) .premium-status-dot { background: #4d9cff; }
+      .premium-status-item:nth-child(3) .premium-status-dot { background: #f0bf5d; }
+      .premium-status-item:nth-child(4) .premium-status-dot { background: #a58af5; }
+
+      .premium-status-item b {
+        color: #edf4fa;
+        font-size: 10px;
+      }
+
+      .premium-status-track {
+        height: 5px;
+        margin-top: 7px;
+        overflow: hidden;
+        border-radius: 10px;
+        background: rgba(255,255,255,.07);
+      }
+
+      .premium-status-track i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg,#16b981,#55e8b7);
+        animation: statusFill 1.4s ease both;
+      }
+
+      @keyframes statusFill {
+        from { width: 0; }
+      }
+
+      .premium-table-card {
+        padding: 15px;
+        border: 1px solid rgba(255,255,255,.075);
+        border-radius: 12px;
+        background: rgba(17,33,51,.9);
+      }
+
+      .premium-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      .premium-table th {
+        padding: 10px 8px;
+        border-bottom: 1px solid rgba(255,255,255,.07);
+        color: #71869d;
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+      }
+
+      .premium-table td {
+        padding: 11px 8px;
+        border-bottom: 1px solid rgba(255,255,255,.045);
+        color: #b7c5d3;
+        font-size: 9px;
+      }
+
+      .premium-table tr:last-child td { border-bottom: 0; }
+
+      .premium-table td strong {
+        display: block;
+        color: #e6eef6;
+        font-size: 9px;
+      }
+
+      .premium-table td small {
+        display: block;
+        margin-top: 3px;
+        color: #73889f;
+        font-size: 8px;
+      }
+
+      .premium-tag {
+        display: inline-block;
+        padding: 4px 7px;
+        border-radius: 20px;
+        color: #62e3b4;
+        background: rgba(34,214,154,.10);
+        font-size: 8px;
+        white-space: nowrap;
+      }
+
+      .premium-tag.blue {
+        color: #86baff;
+        background: rgba(67,140,255,.12);
+      }
+
+      .premium-tag.yellow {
+        color: #f0c66e;
+        background: rgba(240,198,110,.11);
+      }
+
+      .premium-tag.purple {
+        color: #c2aaff;
+        background: rgba(165,138,245,.12);
+      }
+
+      .premium-page {
+        animation: pageReveal .35s ease both;
+      }
+
+      @keyframes pageReveal {
+        from { opacity: 0; transform: translateY(9px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .premium-page-title {
+        margin-bottom: 17px;
+      }
+
+      .premium-page-title h3 {
+        color: #f4f8ff;
+        font-family: Manrope,sans-serif;
+        font-size: 20px;
+      }
+
+      .premium-page-title p {
+        margin-top: 4px;
+        color: #8195aa;
+        font-size: 10px;
+      }
+
+      .premium-demo-button {
+        padding: 8px 12px;
+        border: 1px solid rgba(34,214,154,.22);
+        border-radius: 8px;
+        color: #06251b;
+        background: linear-gradient(135deg,#55e9b7,#19c58d);
+        font-size: 9px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: .2s;
+      }
+
+      .premium-demo-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 18px rgba(34,214,154,.18);
+      }
+
+      .premium-empty-grid {
+        display: grid;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 12px;
+      }
+
+      .premium-info-card {
+        padding: 17px;
+        border: 1px solid rgba(255,255,255,.075);
+        border-radius: 11px;
+        background: rgba(255,255,255,.025);
+      }
+
+      .premium-info-card small {
+        color: #8499ae;
+        font-size: 9px;
+      }
+
+      .premium-info-card strong {
+        display: block;
+        margin-top: 8px;
+        color: #f0f5fa;
+        font-family: Manrope,sans-serif;
+        font-size: 21px;
+      }
+
+      .premium-toast {
+        position: absolute;
+        right: 22px;
+        bottom: 22px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        max-width: calc(100% - 44px);
+        padding: 12px 16px;
+        border: 1px solid rgba(34,214,154,.25);
+        border-radius: 10px;
+        color: #dffbf0;
+        background: #12372f;
+        box-shadow: 0 15px 40px rgba(0,0,0,.35);
+        font-size: 10px;
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition: .3s;
+      }
+
+      .premium-toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .premium-toast span {
+        color: #54e5b4;
+        font-size: 15px;
+      }
+
+      .premium-disclaimer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 17px;
+        color: #73879d;
+        text-align: center;
+        font-size: 9px;
+      }
+
+      .premium-disclaimer span { color: #4bdca9; }
+
+      @media (max-width: 850px) {
+        .premium-app {
+          grid-template-columns: 175px minmax(0,1fr);
+        }
+
+        .premium-main {
+          padding: 17px;
+        }
+
+        .premium-kpis {
+          grid-template-columns: repeat(2,minmax(0,1fr));
+        }
+
+        .premium-content-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .premium-demo {
+          padding: 75px 0;
+        }
+
+        .premium-window {
+          padding: 5px;
+          border-radius: 15px;
+        }
+
+        .premium-browser {
+          height: 30px;
+        }
+
+        .premium-app {
+          grid-template-columns: 1fr;
+        }
+
+        .premium-sidebar {
+          padding: 10px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .premium-brand {
+          padding: 0 5px 10px;
+        }
+
+        .premium-nav-label,
+        .premium-side-bottom {
+          display: none;
+        }
+
+        .premium-nav {
+          display: grid;
+          grid-template-columns: repeat(4,minmax(0,1fr));
+          gap: 4px;
+          margin-top: 9px;
+        }
+
+        .premium-nav button {
+          justify-content: center;
+          flex-direction: column;
+          gap: 3px;
+          min-height: 48px;
+          padding: 6px 2px;
+          font-size: 8px;
+          text-align: center;
+        }
+
+        .premium-nav-icon {
+          font-size: 14px;
+        }
+
+        .premium-main {
+          padding: 13px 10px;
+        }
+
+        .premium-topbar {
+          margin-bottom: 17px;
+        }
+
+        .premium-welcome {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .premium-date {
+          display: none;
+        }
+
+        .premium-kpis {
+          gap: 7px;
+        }
+
+        .premium-kpi {
+          padding: 11px;
+        }
+
+        .premium-kpi strong {
+          font-size: 18px;
+        }
+
+        .premium-card {
+          padding: 12px;
+        }
+
+        .premium-chart {
+          height: 115px;
+        }
+
+        .premium-table-card {
+          overflow-x: auto;
+        }
+
+        .premium-table {
+          min-width: 430px;
+        }
+
+        .premium-empty-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .premium-disclaimer {
+          line-height: 1.5;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .premium-window,
+        .premium-page,
+        .premium-chart-column i,
+        .premium-live::before {
+          animation: none !important;
+        }
+      }
+    </style>
+
+    <section class="premium-demo" id="sistema">
       <div class="container">
 
-        <div class="showcase-grid">
+        <div class="premium-heading reveal">
+          <div class="section-label">Conheça por dentro</div>
+          <h2 class="section-title">
+            Uma gestão completa com
+            <span class="gradient-text">experiência profissional.</span>
+          </h2>
+          <p class="section-description">
+            Explore os módulos do SmartGestão. Navegue pelo painel,
+            visualize indicadores e conheça como sua assistência pode
+            ficar mais organizada.
+          </p>
+        </div>
 
-          <div class="reveal">
-            <div class="section-label">Mais controle no dia a dia</div>
+        <div class="premium-window">
+          <div class="premium-browser">
+            <i></i><i></i><i></i>
+            <div class="premium-address">app.smartgestao.com.br / demonstração</div>
+          </div>
 
-            <h2 class="section-title">
-              Sua operação organizada.
-              <span class="gradient-text">Sua empresa mais profissional.</span>
-            </h2>
+          <div class="premium-app">
 
-            <p class="section-description">
-              O SmartGestão reúne informações importantes da sua assistência
-              em uma plataforma pensada para facilitar a rotina de trabalho.
-            </p>
-
-            <div class="showcase-list">
-
-              <div class="showcase-item">
-                <div class="check">✓</div>
+            <aside class="premium-sidebar">
+              <div class="premium-brand">
+                <div class="premium-brand-icon">S</div>
                 <div>
-                  <strong>Acompanhe cada atendimento</strong>
-                  <p>Visualize as ordens de serviço e acompanhe seus respectivos status.</p>
+                  <strong>SmartGestão</strong>
+                  <small>PAINEL DE GESTÃO</small>
                 </div>
               </div>
 
-              <div class="showcase-item">
-                <div class="check">✓</div>
-                <div>
-                  <strong>Consulte informações rapidamente</strong>
-                  <p>Tenha os registros da empresa organizados em um só ambiente.</p>
+              <div class="premium-nav-label">Workspace</div>
+
+              <nav class="premium-nav" id="premiumNav">
+                <button class="active" data-page="dashboard">
+                  <span class="premium-nav-icon">▦</span> Painel geral
+                </button>
+                <button data-page="ordens">
+                  <span class="premium-nav-icon">🛠</span> Ordens de serviço
+                </button>
+                <button data-page="clientes">
+                  <span class="premium-nav-icon">♙</span> Clientes
+                </button>
+                <button data-page="equipamentos">
+                  <span class="premium-nav-icon">▣</span> Equipamentos
+                </button>
+                <button data-page="estoque">
+                  <span class="premium-nav-icon">▤</span> Estoque
+                </button>
+                <button data-page="financeiro">
+                  <span class="premium-nav-icon">＄</span> Financeiro
+                </button>
+                <button data-page="garantias">
+                  <span class="premium-nav-icon">♧</span> Garantias
+                </button>
+              </nav>
+
+              <div class="premium-side-bottom">
+                <div class="premium-profile">
+                  <div class="premium-avatar">AT</div>
+                  <div>
+                    <strong>Assistência Exemplo</strong>
+                    <small>Conta demonstrativa</small>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <div class="premium-main">
+              <div class="premium-topbar">
+                <div class="premium-breadcrumb">
+                  SmartGestão&nbsp; / &nbsp;<strong id="premiumBreadcrumb">Painel geral</strong>
+                </div>
+                <div class="premium-top-actions">
+                  <span class="premium-live">Ambiente demonstrativo</span>
+                  <button class="premium-icon-button" id="premiumBell" title="Notificações">♧</button>
                 </div>
               </div>
 
-              <div class="showcase-item">
-                <div class="check">✓</div>
-                <div>
-                  <strong>Apresente um serviço mais profissional</strong>
-                  <p>Organize seus processos e ofereça documentos de atendimento e garantia.</p>
+              <div id="premiumPage">
+                <div class="premium-page">
+                  <div class="premium-welcome">
+                    <div>
+                      <small>TERÇA-FEIRA • VISÃO GERAL</small>
+                      <h3>Olá, seja bem-vindo! 👋</h3>
+                      <p>Acompanhe os principais números da sua assistência.</p>
+                    </div>
+                    <div class="premium-date">◷ &nbsp;Resumo do mês</div>
+                  </div>
+
+                  <div class="premium-kpis">
+                    <div class="premium-kpi">
+                      <div class="premium-kpi-label">Ordens de serviço <span class="premium-kpi-icon">▣</span></div>
+                      <strong class="count-up" data-value="128">128</strong>
+                      <div class="premium-kpi-foot">↗ 12% <span>vs. mês anterior</span></div>
+                    </div>
+                    <div class="premium-kpi">
+                      <div class="premium-kpi-label">Clientes cadastrados <span class="premium-kpi-icon">♙</span></div>
+                      <strong class="count-up" data-value="246">246</strong>
+                      <div class="premium-kpi-foot">↗ 8% <span>base de clientes</span></div>
+                    </div>
+                    <div class="premium-kpi">
+                      <div class="premium-kpi-label">Receita do mês <span class="premium-kpi-icon">＄</span></div>
+                      <strong>R$ 8.450</strong>
+                      <div class="premium-kpi-foot">↗ 16% <span>vs. mês anterior</span></div>
+                    </div>
+                    <div class="premium-kpi">
+                      <div class="premium-kpi-label">Em andamento <span class="premium-kpi-icon">◷</span></div>
+                      <strong class="count-up" data-value="35">35</strong>
+                      <div class="premium-kpi-foot muted">Acompanhe suas OS</div>
+                    </div>
+                  </div>
+
+                  <div class="premium-content-grid">
+                    <div class="premium-card">
+                      <div class="premium-card-head">
+                        <strong>Movimentação da operação</strong>
+                        <span>ÚLTIMOS 7 MESES</span>
+                      </div>
+
+                      <div class="premium-chart">
+                        <div class="premium-chart-column"><i style="height:40%"></i><i style="height:27%"></i></div>
+                        <div class="premium-chart-column"><i style="height:55%"></i><i style="height:38%"></i></div>
+                        <div class="premium-chart-column"><i style="height:48%"></i><i style="height:34%"></i></div>
+                        <div class="premium-chart-column"><i style="height:70%"></i><i style="height:49%"></i></div>
+                        <div class="premium-chart-column"><i style="height:62%"></i><i style="height:44%"></i></div>
+                        <div class="premium-chart-column"><i style="height:83%"></i><i style="height:61%"></i></div>
+                        <div class="premium-chart-column"><i style="height:96%"></i><i style="height:73%"></i></div>
+                      </div>
+
+                      <div class="premium-chart-labels">
+                        <span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span><span>Nov</span>
+                      </div>
+                    </div>
+
+                    <div class="premium-card">
+                      <div class="premium-card-head">
+                        <strong>Status das ordens</strong>
+                        <span>RESUMO</span>
+                      </div>
+
+                      <div class="premium-status-list">
+                        <div>
+                          <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Concluídas</span><b>68</b></div>
+                          <div class="premium-status-track"><i style="width:78%"></i></div>
+                        </div>
+                        <div>
+                          <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Em andamento</span><b>35</b></div>
+                          <div class="premium-status-track"><i style="width:52%;background:linear-gradient(90deg,#367fdc,#69adff)"></i></div>
+                        </div>
+                        <div>
+                          <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Aguardando</span><b>18</b></div>
+                          <div class="premium-status-track"><i style="width:31%;background:linear-gradient(90deg,#c18a30,#f2c76d)"></i></div>
+                        </div>
+                        <div>
+                          <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Em análise</span><b>7</b></div>
+                          <div class="premium-status-track"><i style="width:17%;background:linear-gradient(90deg,#8464d4,#b9a0ff)"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="premium-table-card">
+                    <div class="premium-card-head">
+                      <strong>Ordens de serviço recentes</strong>
+                      <span>ATUALIZAÇÃO ILUSTRATIVA</span>
+                    </div>
+                    <table class="premium-table">
+                      <thead>
+                        <tr>
+                          <th>Ordem</th>
+                          <th>Cliente</th>
+                          <th>Equipamento</th>
+                          <th>Valor</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><strong>#OS-1028</strong><small>Hoje, 10:42</small></td>
+                          <td>Mariana Costa</td>
+                          <td>Notebook Dell</td>
+                          <td>R$ 350,00</td>
+                          <td><span class="premium-tag">Concluída</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>#OS-1027</strong><small>Hoje, 09:18</small></td>
+                          <td>Rafael Mendes</td>
+                          <td>Smartphone</td>
+                          <td>R$ 180,00</td>
+                          <td><span class="premium-tag blue">Em análise</span></td>
+                        </tr>
+                        <tr>
+                          <td><strong>#OS-1026</strong><small>Ontem, 16:30</small></td>
+                          <td>Camila Oliveira</td>
+                          <td>Computador</td>
+                          <td>R$ 220,00</td>
+                          <td><span class="premium-tag yellow">Aguardando</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-
-            </div>
-
-            <div style="margin-top:30px">
-              <a href="app.html#demo" class="btn btn-primary">Ver demonstração completa →</a>
             </div>
           </div>
 
-          <div class="showcase-visual reveal reveal-delay-2">
-            <div class="mini-top">
-              <strong>Ordens de serviço</strong>
-              <span>VISÃO ILUSTRATIVA</span>
-            </div>
-
-            <div class="order-row">
-              <div class="order-name">
-                <strong>OS #1028</strong>
-                <small>Notebook • Cliente demonstrativo</small>
-              </div>
-              <div class="order-price">R$ 350,00</div>
-              <div class="pill">Concluída</div>
-            </div>
-
-            <div class="order-row">
-              <div class="order-name">
-                <strong>OS #1027</strong>
-                <small>Smartphone • Cliente demonstrativo</small>
-              </div>
-              <div class="order-price">R$ 180,00</div>
-              <div class="pill blue">Em análise</div>
-            </div>
-
-            <div class="order-row">
-              <div class="order-name">
-                <strong>OS #1026</strong>
-                <small>Computador • Cliente demonstrativo</small>
-              </div>
-              <div class="order-price">R$ 220,00</div>
-              <div class="pill yellow">Aguardando</div>
-            </div>
-
-            <div class="order-row">
-              <div class="order-name">
-                <strong>OS #1025</strong>
-                <small>Tablet • Cliente demonstrativo</small>
-              </div>
-              <div class="order-price">R$ 290,00</div>
-              <div class="pill">Concluída</div>
-            </div>
-
+          <div class="premium-toast" id="premiumToast">
+            <span>✓</span>
+            <div id="premiumToastText">Ação demonstrativa.</div>
           </div>
         </div>
+
+        <div class="premium-disclaimer">
+          <span>✦</span>
+          Ambiente ilustrativo com informações fictícias. Explore os módulos pelo menu.
+        </div>
+
       </div>
     </section>
-
-    <!-- COMO FUNCIONA -->
+        <!-- COMO FUNCIONA -->
     <section class="section" id="como-funciona">
       <div class="container">
 
@@ -1728,7 +2699,7 @@
       <div class="footer-links">
         <a href="#recursos">Recursos</a>
         <a href="#planos">Planos</a>
-        <a href="app.html#demo">Demonstração</a>
+        <a href="#sistema">Demonstração</a>
         <a href="app.html">Acessar sistema</a>
       </div>
 
@@ -1736,7 +2707,10 @@
   </footer>
 
   <script>
+    // ==========================================
     // MENU MOBILE
+    // ==========================================
+
     const mobileToggle = document.getElementById("mobileToggle");
     const navLinks = document.getElementById("navLinks");
 
@@ -1753,14 +2727,20 @@
       });
     });
 
+    // ==========================================
     // CABEÇALHO AO ROLAR
+    // ==========================================
+
     const header = document.getElementById("header");
 
     window.addEventListener("scroll", () => {
       header.classList.toggle("scrolled", window.scrollY > 20);
     }, { passive: true });
 
+    // ==========================================
     // ANIMAÇÕES AO ENTRAR NA TELA
+    // ==========================================
+
     const revealElements = document.querySelectorAll(".reveal");
 
     if ("IntersectionObserver" in window) {
@@ -1780,9 +2760,432 @@
       revealElements.forEach(element => element.classList.add("visible"));
     }
 
+    // ==========================================
     // ANO AUTOMÁTICO NO RODAPÉ
+    // ==========================================
+
     document.getElementById("currentYear").textContent =
       new Date().getFullYear();
+
+    // ==========================================
+    // DEMONSTRAÇÃO PREMIUM - NAVEGAÇÃO
+    // ==========================================
+
+    const premiumNav = document.getElementById("premiumNav");
+    const premiumPage = document.getElementById("premiumPage");
+    const premiumBreadcrumb = document.getElementById("premiumBreadcrumb");
+    const premiumToast = document.getElementById("premiumToast");
+    const premiumToastText = document.getElementById("premiumToastText");
+
+    let premiumToastTimer;
+
+    function showPremiumToast(message) {
+      premiumToastText.textContent = message;
+      premiumToast.classList.add("show");
+
+      clearTimeout(premiumToastTimer);
+
+      premiumToastTimer = setTimeout(() => {
+        premiumToast.classList.remove("show");
+      }, 2800);
+    }
+
+    const premiumPages = {
+
+      ordens: {
+        title: "Ordens de serviço",
+        subtitle: "Acompanhe os atendimentos e organize cada etapa.",
+        button: "＋ Nova ordem",
+        stats: [
+          ["Total de ordens", "128"],
+          ["Em andamento", "35"],
+          ["Aguardando", "18"],
+          ["Concluídas", "68"]
+        ],
+        tableTitle: "Ordens recentes",
+        headers: ["Ordem", "Cliente", "Equipamento", "Valor", "Status"],
+        rows: [
+          ["#OS-1028", "Mariana Costa", "Notebook Dell", "R$ 350,00", "Concluída", "green"],
+          ["#OS-1027", "Rafael Mendes", "Smartphone", "R$ 180,00", "Em análise", "blue"],
+          ["#OS-1026", "Camila Oliveira", "Computador", "R$ 220,00", "Aguardando", "yellow"],
+          ["#OS-1025", "Pedro Almeida", "Tablet", "R$ 290,00", "Concluída", "green"]
+        ]
+      },
+
+      clientes: {
+        title: "Clientes",
+        subtitle: "Informações organizadas para facilitar seus atendimentos.",
+        button: "＋ Novo cliente",
+        stats: [
+          ["Clientes cadastrados", "246"],
+          ["Novos neste mês", "32"],
+          ["Atendimentos ativos", "35"],
+          ["Clientes recorrentes", "74"]
+        ],
+        tableTitle: "Clientes cadastrados",
+        headers: ["Código", "Cliente", "Contato", "Ordens", "Cadastro"],
+        rows: [
+          ["#CLI-0246", "Mariana Costa", "(21) 99999-1001", "8", "Hoje"],
+          ["#CLI-0245", "Rafael Mendes", "(21) 99999-1002", "3", "Ontem"],
+          ["#CLI-0244", "Camila Oliveira", "(21) 99999-1003", "5", "18/11/2026"],
+          ["#CLI-0243", "Pedro Almeida", "(21) 99999-1004", "2", "17/11/2026"]
+        ]
+      },
+
+      equipamentos: {
+        title: "Equipamentos",
+        subtitle: "Controle os aparelhos recebidos e seus históricos.",
+        button: "＋ Novo equipamento",
+        stats: [
+          ["Equipamentos", "184"],
+          ["Em manutenção", "35"],
+          ["Aguardando retirada", "18"],
+          ["Entregues", "131"]
+        ],
+        tableTitle: "Equipamentos registrados",
+        headers: ["Código", "Equipamento", "Cliente", "Entrada", "Situação"],
+        rows: [
+          ["#EQ-0184", "Notebook Dell", "Mariana Costa", "Hoje", "Em manutenção"],
+          ["#EQ-0183", "iPhone 13", "Rafael Mendes", "Hoje", "Em análise"],
+          ["#EQ-0182", "PC Gamer", "Camila Oliveira", "Ontem", "Aguardando"],
+          ["#EQ-0181", "Tablet Samsung", "Pedro Almeida", "17/11", "Entregue"]
+        ]
+      },
+
+      estoque: {
+        title: "Estoque",
+        subtitle: "Tenha mais controle sobre peças e materiais.",
+        button: "＋ Novo produto",
+        stats: [
+          ["Produtos cadastrados", "86"],
+          ["Estoque disponível", "342"],
+          ["Estoque baixo", "7"],
+          ["Movimentações", "54"]
+        ],
+        tableTitle: "Produtos em estoque",
+        headers: ["Código", "Produto", "Categoria", "Quantidade", "Situação"],
+        rows: [
+          ["#PR-0086", "Tela Notebook 15.6", "Peças", "12 un.", "Disponível"],
+          ["#PR-0085", "SSD 480GB", "Armazenamento", "8 un.", "Disponível"],
+          ["#PR-0084", "Fonte ATX 500W", "Componentes", "3 un.", "Estoque baixo"],
+          ["#PR-0083", "Conector USB-C", "Peças", "25 un.", "Disponível"]
+        ]
+      },
+
+      financeiro: {
+        title: "Financeiro",
+        subtitle: "Visualize entradas, despesas e resultados da operação.",
+        button: "＋ Lançamento",
+        stats: [
+          ["Receitas do mês", "R$ 8.450"],
+          ["Despesas", "R$ 2.180"],
+          ["Resultado", "R$ 6.270"],
+          ["Pendentes", "R$ 740"]
+        ],
+        tableTitle: "Movimentações recentes",
+        headers: ["Descrição", "Categoria", "Data", "Valor", "Tipo"],
+        rows: [
+          ["OS #1028 - Serviço", "Receita", "24/11/2026", "R$ 350,00", "Entrada"],
+          ["Compra de peças", "Estoque", "23/11/2026", "R$ 280,00", "Saída"],
+          ["OS #1027 - Serviço", "Receita", "23/11/2026", "R$ 180,00", "Entrada"],
+          ["Conta de energia", "Despesa", "22/11/2026", "R$ 190,00", "Saída"]
+        ]
+      },
+
+      garantias: {
+        title: "Garantias",
+        subtitle: "Documentos de garantia organizados por atendimento.",
+        button: "＋ Nova garantia",
+        stats: [
+          ["Certificados emitidos", "92"],
+          ["Garantias ativas", "64"],
+          ["Próximas do vencimento", "8"],
+          ["Encerradas", "28"]
+        ],
+        tableTitle: "Certificados de garantia",
+        headers: ["Certificado", "Cliente", "Equipamento", "Validade", "Situação"],
+        rows: [
+          ["#GAR-0092", "Mariana Costa", "Notebook Dell", "24/02/2027", "Ativa"],
+          ["#GAR-0091", "Rafael Mendes", "Smartphone", "20/02/2027", "Ativa"],
+          ["#GAR-0090", "Camila Oliveira", "Computador", "15/12/2026", "Próxima do fim"],
+          ["#GAR-0089", "Pedro Almeida", "Tablet", "10/11/2026", "Encerrada"]
+        ]
+      }
+    };
+
+    function premiumStatusClass(status) {
+      const value = String(status).toLowerCase();
+
+      if (
+        value.includes("concluída") ||
+        value.includes("disponível") ||
+        value.includes("entrada") ||
+        value.includes("ativa")
+      ) return "green";
+
+      if (
+        value.includes("análise") ||
+        value.includes("saída")
+      ) return "blue";
+
+      if (
+        value.includes("aguardando") ||
+        value.includes("baixo") ||
+        value.includes("vencimento") ||
+        value.includes("fim")
+      ) return "yellow";
+
+      return "purple";
+    }
+
+    function renderPremiumPage(pageKey) {
+      const page = premiumPages[pageKey];
+
+      if (!page) return;
+
+      premiumBreadcrumb.textContent = page.title;
+
+      const statsHTML = page.stats.map((item, index) => `
+        <div class="premium-kpi">
+          <div class="premium-kpi-label">
+            ${item[0]}
+            <span class="premium-kpi-icon">${["▣","◷","↗","✦"][index]}</span>
+          </div>
+          <strong>${item[1]}</strong>
+          <div class="premium-kpi-foot muted">Informação demonstrativa</div>
+        </div>
+      `).join("");
+
+      const headersHTML = page.headers.map(header => `
+        <th>${header}</th>
+      `).join("");
+
+      const rowsHTML = page.rows.map(row => {
+        const cells = row.slice(0, -1);
+        const status = row[row.length - 2];
+        const statusClass = premiumStatusClass(status);
+
+        return `
+          <tr>
+            ${cells.map((cell, index) => `
+              <td>${index === 0 ? `<strong>${cell}</strong>` : cell}</td>
+            `).join("")}
+            <td><span class="premium-tag ${statusClass}">${status}</span></td>
+          </tr>
+        `;
+      }).join("");
+
+      premiumPage.innerHTML = `
+        <div class="premium-page">
+          <div class="premium-welcome">
+            <div>
+              <small>SMARTGESTÃO • MÓDULO</small>
+              <h3>${page.title}</h3>
+              <p>${page.subtitle}</p>
+            </div>
+            <button class="premium-demo-button" id="premiumAction">
+              ${page.button}
+            </button>
+          </div>
+
+          <div class="premium-kpis">
+            ${statsHTML}
+          </div>
+
+          <div class="premium-table-card">
+            <div class="premium-card-head">
+              <strong>${page.tableTitle}</strong>
+              <span>DADOS FICTÍCIOS</span>
+            </div>
+            <table class="premium-table">
+              <thead><tr>${headersHTML}</tr></thead>
+              <tbody>${rowsHTML}</tbody>
+            </table>
+          </div>
+
+          <div class="premium-empty-grid" style="margin-top:13px">
+            <div class="premium-info-card">
+              <small>Organização e controle</small>
+              <strong>Em um só lugar</strong>
+            </div>
+            <div class="premium-info-card">
+              <small>Experiência SmartGestão</small>
+              <strong>Gestão simplificada</strong>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const actionButton = document.getElementById("premiumAction");
+
+      actionButton.addEventListener("click", () => {
+        showPremiumToast(
+          "Esta ação faz parte da demonstração. Acesse o sistema para conhecer os recursos disponíveis."
+        );
+      });
+    }
+
+    premiumNav.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", () => {
+        premiumNav.querySelectorAll("button").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        const pageKey = button.dataset.page;
+
+        if (pageKey === "dashboard") {
+          premiumBreadcrumb.textContent = "Painel geral";
+
+          premiumPage.innerHTML = `
+            <div class="premium-page">
+              <div class="premium-welcome">
+                <div>
+                  <small>TERÇA-FEIRA • VISÃO GERAL</small>
+                  <h3>Olá, seja bem-vindo! 👋</h3>
+                  <p>Acompanhe os principais números da sua assistência.</p>
+                </div>
+                <div class="premium-date">◷ &nbsp;Resumo do mês</div>
+              </div>
+
+              <div class="premium-kpis">
+                <div class="premium-kpi">
+                  <div class="premium-kpi-label">Ordens de serviço <span class="premium-kpi-icon">▣</span></div>
+                  <strong>128</strong>
+                  <div class="premium-kpi-foot">↗ 12% <span>vs. mês anterior</span></div>
+                </div>
+                <div class="premium-kpi">
+                  <div class="premium-kpi-label">Clientes cadastrados <span class="premium-kpi-icon">♙</span></div>
+                  <strong>246</strong>
+                  <div class="premium-kpi-foot">↗ 8% <span>base de clientes</span></div>
+                </div>
+                <div class="premium-kpi">
+                  <div class="premium-kpi-label">Receita do mês <span class="premium-kpi-icon">＄</span></div>
+                  <strong>R$ 8.450</strong>
+                  <div class="premium-kpi-foot">↗ 16% <span>vs. mês anterior</span></div>
+                </div>
+                <div class="premium-kpi">
+                  <div class="premium-kpi-label">Em andamento <span class="premium-kpi-icon">◷</span></div>
+                  <strong>35</strong>
+                  <div class="premium-kpi-foot muted">Acompanhe suas OS</div>
+                </div>
+              </div>
+
+              <div class="premium-content-grid">
+                <div class="premium-card">
+                  <div class="premium-card-head">
+                    <strong>Movimentação da operação</strong>
+                    <span>ÚLTIMOS 7 MESES</span>
+                  </div>
+                  <div class="premium-chart">
+                    <div class="premium-chart-column"><i style="height:40%"></i><i style="height:27%"></i></div>
+                    <div class="premium-chart-column"><i style="height:55%"></i><i style="height:38%"></i></div>
+                    <div class="premium-chart-column"><i style="height:48%"></i><i style="height:34%"></i></div>
+                    <div class="premium-chart-column"><i style="height:70%"></i><i style="height:49%"></i></div>
+                    <div class="premium-chart-column"><i style="height:62%"></i><i style="height:44%"></i></div>
+                    <div class="premium-chart-column"><i style="height:83%"></i><i style="height:61%"></i></div>
+                    <div class="premium-chart-column"><i style="height:96%"></i><i style="height:73%"></i></div>
+                  </div>
+                  <div class="premium-chart-labels">
+                    <span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span><span>Nov</span>
+                  </div>
+                </div>
+
+                <div class="premium-card">
+                  <div class="premium-card-head">
+                    <strong>Status das ordens</strong>
+                    <span>RESUMO</span>
+                  </div>
+                  <div class="premium-status-list">
+                    <div>
+                      <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Concluídas</span><b>68</b></div>
+                      <div class="premium-status-track"><i style="width:78%"></i></div>
+                    </div>
+                    <div>
+                      <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Em andamento</span><b>35</b></div>
+                      <div class="premium-status-track"><i style="width:52%;background:linear-gradient(90deg,#367fdc,#69adff)"></i></div>
+                    </div>
+                    <div>
+                      <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Aguardando</span><b>18</b></div>
+                      <div class="premium-status-track"><i style="width:31%;background:linear-gradient(90deg,#c18a30,#f2c76d)"></i></div>
+                    </div>
+                    <div>
+                      <div class="premium-status-item"><span class="premium-status-name"><i class="premium-status-dot"></i>Em análise</span><b>7</b></div>
+                      <div class="premium-status-track"><i style="width:17%;background:linear-gradient(90deg,#8464d4,#b9a0ff)"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="premium-table-card">
+                <div class="premium-card-head">
+                  <strong>Ordens de serviço recentes</strong>
+                  <span>ATUALIZAÇÃO ILUSTRATIVA</span>
+                </div>
+                <table class="premium-table">
+                  <thead>
+                    <tr>
+                      <th>Ordem</th><th>Cliente</th><th>Equipamento</th><th>Valor</th><th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>#OS-1028</strong><small>Hoje, 10:42</small></td>
+                      <td>Mariana Costa</td><td>Notebook Dell</td><td>R$ 350,00</td>
+                      <td><span class="premium-tag">Concluída</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>#OS-1027</strong><small>Hoje, 09:18</small></td>
+                      <td>Rafael Mendes</td><td>Smartphone</td><td>R$ 180,00</td>
+                      <td><span class="premium-tag blue">Em análise</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>#OS-1026</strong><small>Ontem, 16:30</small></td>
+                      <td>Camila Oliveira</td><td>Computador</td><td>R$ 220,00</td>
+                      <td><span class="premium-tag yellow">Aguardando</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+
+        } else {
+          renderPremiumPage(pageKey);
+        }
+      });
+    });
+
+    // ==========================================
+    // NOTIFICAÇÃO DEMONSTRATIVA
+    // ==========================================
+
+    document.getElementById("premiumBell").addEventListener("click", () => {
+      showPremiumToast(
+        "Você está explorando uma conta demonstrativa do SmartGestão."
+      );
+    });
+
+    // ==========================================
+    // ENTRADA ANIMADA DA DEMONSTRAÇÃO
+    // ==========================================
+
+    const premiumWindow = document.querySelector(".premium-window");
+
+    if ("IntersectionObserver" in window && premiumWindow) {
+      const premiumObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            premiumWindow.style.animationPlayState = "running";
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      premiumObserver.observe(premiumWindow);
+    }
+
   </script>
 
 </body>
