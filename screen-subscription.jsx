@@ -1,7 +1,7 @@
-
 // ARQUIVO: screen-subscription.jsx
 // Tela de assinatura SmartGestão
-// Contratação online temporariamente indisponível até aprovação do Asaas.
+// Oferta Parceiro Fundador — primeiros 10 clientes.
+// Contratação online bloqueada até aprovação do Asaas.
 
 async function subscriptionErrorMessage(ex) {
   try {
@@ -90,7 +90,7 @@ function SubscriptionScreen({ ctx }) {
           <span className="workspace-overline">PLANO E COBRANÇA</span>
           <h1>Assinatura</h1>
           <p className="mut">
-            Gerencie o plano mensal da sua empresa.
+            Conheça as condições do plano SmartGestão.
           </p>
         </div>
       </div>
@@ -99,17 +99,65 @@ function SubscriptionScreen({ ctx }) {
         <div className="sub-plan card">
           <div className="sub-plan-top">
             <div>
-              <span className="sub-kicker">PLANO SMARTGESTÃO</span>
-              <h2>Completo</h2>
+              <span className="sub-kicker">OFERTA PARCEIRO FUNDADOR</span>
+              <h2>Plano Completo</h2>
               <p>
                 Gestão de clientes, ordens de serviço, equipamentos,
-                estoque e financeiro.
+                estoque e financeiro em um só lugar.
               </p>
             </div>
-
             <div className="sub-price">
-              <strong>R$ 39,90</strong>
+              <strong>R$ 59,90</strong>
               <span>por mês</span>
+            </div>
+          </div>
+
+          <div style={{
+            marginTop: "20px",
+            padding: "16px",
+            borderRadius: "12px",
+            background: "#f5f8f6",
+            border: "1px solid #e3ebe6"
+          }}>
+            <div style={{
+              color: "#345b50",
+              fontSize: "11px",
+              fontWeight: 800,
+              letterSpacing: "1px"
+            }}>
+              CONDIÇÃO ESPECIAL DE LANÇAMENTO
+            </div>
+
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "12px",
+              flexWrap: "wrap",
+              marginTop: "9px"
+            }}>
+              <div>
+                <div style={{
+                  fontSize: "13px",
+                  color: "#52616b"
+                }}>
+                  Implantação — pagamento único
+                </div>
+                <strong style={{
+                  fontSize: "23px",
+                  color: "#293b49"
+                }}>
+                  R$ 300,00
+                </strong>
+              </div>
+
+              <div style={{
+                fontSize: "11px",
+                color: "#6d7b83",
+                maxWidth: "230px"
+              }}>
+                Condição especial para os primeiros 10 clientes.
+              </div>
             </div>
           </div>
 
@@ -117,7 +165,14 @@ function SubscriptionScreen({ ctx }) {
             <span>✓ Acesso aos módulos</span>
             <span>✓ Dados separados por empresa</span>
             <span>✓ Atualizações da plataforma</span>
+            <span>✓ Mensalidade fixa enquanto mantiver a assinatura</span>
           </div>
+
+          <p className="sub-note">
+            A oferta Parceiro Fundador é limitada aos 10 primeiros clientes.
+            A mensalidade de R$ 59,90 permanece fixa enquanto a assinatura
+            for mantida, conforme as condições da oferta.
+          </p>
         </div>
       )}
 
@@ -206,15 +261,16 @@ function SubscriptionScreen({ ctx }) {
           <h3>Contratação online em breve</h3>
 
           <p className="mut">
-            O SmartGestão está finalizando a liberação dos pagamentos
-            online. A contratação será disponibilizada assim que a
-            análise da conta de recebimento for concluída pelo Asaas.
+            Estamos finalizando a liberação dos pagamentos online.
+            A contratação será disponibilizada assim que a análise
+            da conta de recebimento for concluída pelo Asaas.
           </p>
 
           <p className="sub-note">
-            Plano Completo por R$ 39,90 mensais. Entre em contato
-            com nossa equipe para conhecer a plataforma e solicitar
-            informações sobre a implantação.
+            Oferta de lançamento: R$ 300,00 de implantação e R$ 59,90
+            mensais para os primeiros 10 clientes. Nenhuma cobrança
+            será realizada por esta tela enquanto a contratação online
+            estiver indisponível.
           </p>
         </div>
       )}
