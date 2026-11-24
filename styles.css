@@ -335,3 +335,84 @@ td{font-size:12px}
 .sub-price strong{font-size:23px}
 .sub-includes{display:grid;gap:9px}
 }
+/* ===== Animações profissionais SmartGestão ===== */
+@keyframes sgPageEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sgSoftEnter {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.workspace-content {
+  animation: sgPageEnter .42s cubic-bezier(.2,.75,.25,1) both;
+}
+
+.workspace-content .card,
+.workspace-content .tw,
+.workspace-content .tools {
+  animation: sgSoftEnter .38s ease both;
+}
+
+.workspace-content .grid > .card:nth-child(2) {
+  animation-delay: .045s;
+}
+
+.workspace-content .grid > .card:nth-child(3) {
+  animation-delay: .09s;
+}
+
+.workspace-content .grid > .card:nth-child(4) {
+  animation-delay: .135s;
+}
+
+.nav button {
+  transition: background .2s ease, color .2s ease,
+    transform .2s ease, box-shadow .2s ease;
+}
+
+.nav button:hover {
+  transform: translateX(3px);
+}
+
+.btn, .chip, .demo-link, .mobile-menu {
+  transition: transform .18s ease, box-shadow .18s ease,
+    filter .18s ease, background .18s ease;
+}
+
+.btn:hover, .demo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(40,65,58,.14);
+}
+
+.btn:active, .chip:active, .demo-link:active {
+  transform: scale(.98);
+}
+
+.fld input, .fld select, .fld textarea, .tools input {
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.fld input:focus, .fld select:focus,
+.fld textarea:focus, .tools input:focus {
+  outline: none;
+  border-color: #8aa99d;
+  box-shadow: 0 0 0 3px rgba(85,125,115,.12);
+}
+
+tbody tr {
+  transition: background .16s ease;
+}
+
+tbody tr:hover {
+  background: #f8faf9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
