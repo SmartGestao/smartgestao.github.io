@@ -416,3 +416,222 @@ tbody tr:hover {
     transition-duration: .01ms !important;
   }
 }
+
+/* =========================================
+   SMARTGESTÃO — ANIMAÇÕES E MICROINTERAÇÕES
+   ========================================= */
+
+@keyframes sgFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sgSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sgSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sgModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sgPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(85,125,115,0);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(85,125,115,.09);
+  }
+}
+
+/* Entrada das páginas */
+.workspace-content {
+  animation: sgSlideUp .48s cubic-bezier(.2,.75,.25,1) both;
+}
+
+/* Cartões e indicadores */
+.workspace-content .card {
+  animation: sgSlideUp .45s ease both;
+}
+
+.workspace-content .grid > .card:nth-child(1) {
+  animation-delay: .04s;
+}
+
+.workspace-content .grid > .card:nth-child(2) {
+  animation-delay: .09s;
+}
+
+.workspace-content .grid > .card:nth-child(3) {
+  animation-delay: .14s;
+}
+
+.workspace-content .grid > .card:nth-child(4) {
+  animation-delay: .19s;
+}
+
+/* Menu lateral */
+.nav button {
+  transition:
+    transform .22s ease,
+    background .22s ease,
+    color .22s ease,
+    box-shadow .22s ease;
+}
+
+.nav button:hover {
+  transform: translateX(5px);
+}
+
+.nav button.on {
+  box-shadow: inset 3px 0 0 #638f80;
+}
+
+/* Ícones do menu */
+.nav-icon {
+  transition: transform .25s ease, background .25s ease;
+}
+
+.nav button:hover .nav-icon {
+  transform: scale(1.09);
+}
+
+/* Botões */
+.btn {
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 17px rgba(38,55,71,.13);
+  filter: brightness(1.04);
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+/* Cartões */
+.card {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(38,55,71,.08);
+}
+
+/* Campos */
+.fld input,
+.fld select,
+.fld textarea,
+.tools input {
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+.fld input:focus,
+.fld select:focus,
+.fld textarea:focus,
+.tools input:focus {
+  border-color: #72998a;
+  box-shadow: 0 0 0 4px rgba(85,125,115,.12);
+}
+
+/* Tabelas */
+tbody tr {
+  transition: background .18s ease;
+}
+
+tbody tr:hover {
+  background: #f1f6f3;
+}
+
+/* Janelas e formulários */
+.ov {
+  animation: sgFadeIn .2s ease both;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  animation: sgModalEnter .28s cubic-bezier(.2,.75,.25,1) both;
+  box-shadow: 0 24px 70px rgba(25,40,53,.18);
+}
+
+/* Filtros */
+.chip {
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.chip:hover {
+  transform: translateY(-2px);
+}
+
+/* Área de login */
+.auth-card {
+  animation: sgSlideUp .55s ease both;
+}
+
+.brand-symbol {
+  transition: transform .3s ease;
+}
+
+.brand-symbol:hover {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+/* Cabeçalho */
+.workspace-top {
+  transition: box-shadow .25s ease;
+}
+
+/* Respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
