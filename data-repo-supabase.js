@@ -1,3 +1,4 @@
+
 function erroPt(e){
   const c=e&&e.code, m=(e&&e.message)||String(e);
   const mapa={
@@ -187,13 +188,54 @@ const MAPA = {
   }
 };
 
+// Cadastro de dados da empresa
+const PERFIL_EMPRESA = {
+  tabela:"company_profiles",
+
+  de:r=>({
+    id:r.id,
+    razaoSocial:r.legal_name||"",
+    nomeFantasia:r.trade_name||"",
+    documento:r.document||"",
+    telefone:r.phone||"",
+    whatsapp:r.whatsapp||"",
+    email:r.email||"",
+    cep:r.postal_code||"",
+    rua:r.street||"",
+    numero:r.address_number||"",
+    complemento:r.complement||"",
+    bairro:r.neighborhood||"",
+    cidade:r.city||"",
+    estado:r.state||"",
+    logoUrl:r.logo_url||""
+  }),
+
+  para:o=>({
+    legal_name:o.razaoSocial||null,
+    trade_name:o.nomeFantasia||null,
+    document:o.documento||null,
+    phone:o.telefone||null,
+    whatsapp:o.whatsapp||null,
+    email:o.email||null,
+    postal_code:o.cep||null,
+    street:o.rua||null,
+    address_number:o.numero||null,
+    complement:o.complemento||null,
+    neighborhood:o.bairro||null,
+    city:o.cidade||null,
+    state:o.estado||null,
+    logo_url:o.logoUrl||null
+  })
+};
+
 const repoSupabase = {
   async load(companyId){
     if(!sb) throw new Error("Supabase não configurado.");
 
     const db={
       lancamentos:[],
-      garantias:[]
+      garantias:[],
+      perfilEmpresa:null
     };
 
     for(const k of Object.keys(MAPA)){
@@ -211,10 +253,47 @@ const repoSupabase = {
       db[k]=(data||[]).map(m.de);
     }
 
+    // Carrega o perfil da empresa
+    const {data:perfil,error:erroPerfil}=await sb
+      .from(PERFIL_EMPRESA.tabela)
+      .select("*")
+      .eq("company_id",companyId)
+      .maybeSingle();
+
+    if(erroPerfil)
+      throw new Error(
+        PERFIL_EMPRESA.tabela+": "+erroPt(erroPerfil)
+      );
+
+    db.perfilEmpresa=perfil
+      ?PERFIL_EMPRESA.de(perfil)
+      :null;
+
     return db;
   },
 
   async save(tab,o,companyId){
+    // Salva ou atualiza o perfil da empresa
+    if(tab==="perfilEmpresa"){
+      const row=PERFIL_EMPRESA.para(o);
+
+      const {data,error}=await sb
+        .from(PERFIL_EMPRESA.tabela)
+        .upsert(
+          {...row,company_id:companyId},
+          {onConflict:"company_id"}
+        )
+        .select()
+        .single();
+
+      if(error)
+        throw new Error(
+          PERFIL_EMPRESA.tabela+": "+erroPt(error)
+        );
+
+      return PERFIL_EMPRESA.de(data);
+    }
+
     const m=MAPA[tab];
 
     if(!m)
