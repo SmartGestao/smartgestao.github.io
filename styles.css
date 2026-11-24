@@ -1664,3 +1664,228 @@ tr:last-child td {
     scroll-behavior: auto !important;
   }
 }
+
+/* =========================================================
+   SMARTGESTÃO — MICROINTERAÇÕES PREMIUM
+   Complemento visual sem alterar a lógica do sistema
+   ========================================================= */
+
+/* Transições mais suaves */
+button,
+a,
+.card,
+.nav button,
+.chip,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Efeito de brilho nos botões */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255,255,255,.22),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left .55s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 150%;
+}
+
+/* Resposta visual ao pressionar */
+.btn:active,
+.nav button:active,
+.chip:active {
+  transform: scale(.97);
+}
+
+/* Cartões com profundidade */
+.card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(86,145,242,.38);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.19),
+    0 0 0 1px rgba(86,145,242,.04);
+}
+
+/* Indicadores com destaque */
+.kpi {
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.kpi:hover {
+  transform: translateY(-5px);
+}
+
+.kpi b {
+  transition: color .2s ease;
+}
+
+.kpi:hover b {
+  color: #8dbaff;
+}
+
+/* Menu lateral */
+.nav button {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.nav button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(67,136,255,.12),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity .2s ease;
+  z-index: -1;
+}
+
+.nav button:hover::after,
+.nav button.on::after {
+  opacity: 1;
+}
+
+/* Campos de formulário */
+.fld input:hover,
+.fld select:hover,
+.fld textarea:hover,
+.tools input:hover {
+  border-color: rgba(86,145,242,.45);
+}
+
+.fld input:focus,
+.fld select:focus,
+.fld textarea:focus,
+.tools input:focus {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 3px rgba(67,136,255,.15),
+    0 5px 16px rgba(0,0,0,.12);
+}
+
+/* Tabelas */
+tbody tr {
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(67,136,255,.085);
+}
+
+/* Etiquetas */
+.bdg {
+  transition: transform .2s ease, filter .2s ease;
+}
+
+.bdg:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
+
+/* Modal */
+.modal {
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.ov {
+  overscroll-behavior: contain;
+}
+
+/* Cabeçalho */
+.workspace-top {
+  transition:
+    background .25s ease,
+    border-color .25s ease;
+}
+
+/* Animação de entrada dos conteúdos */
+.workspace-content {
+  animation: sgPremiumEnter .45s cubic-bezier(.2,.75,.25,1) both;
+}
+
+@keyframes sgPremiumEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Realce de foco acessível */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #78aaff;
+  outline-offset: 3px;
+}
+
+/* Em telas sensíveis ao toque, evita efeitos exagerados */
+@media (hover: none) {
+  .card:hover,
+  .kpi:hover,
+  .nav button:hover {
+    transform: none;
+  }
+
+  .btn::before {
+    display: none;
+  }
+}
+
+/* Respeita usuários que preferem menos animações */
+@media (prefers-reduced-motion: reduce) {
+  .workspace-content,
+  .card,
+  .kpi,
+  .btn,
+  .nav button,
+  .bdg,
+  tbody tr {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .btn::before {
+    display: none !important;
+  }
+}
