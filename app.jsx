@@ -1,5 +1,5 @@
-
- // ARQUIVO: app.jsx — menu, telas, regras de negócio e inicialização
+```jsx
+// ARQUIVO: app.jsx — menu, telas, regras de negócio e inicialização
 /* ============ APLICAÇÃO ============ */
 
 const MENU = [
@@ -183,7 +183,7 @@ function App({ctx}){
           osId:salva.id,
           clienteId:salva.clienteId,
           equipamentoId:salva.equipId,
-          numeroCertificado:"GAR-"+salva.numero,
+          numeroCertificado:"GAR-"+String(salva.id).replace(/-/g,"").slice(0,12).toUpperCase(),
           dias:90,
           descricao:salva.diagnostico||
             "Serviço realizado na "+salva.numero,
@@ -272,7 +272,7 @@ function App({ctx}){
           osId:rec.id,
           clienteId:rec.clienteId,
           equipamentoId:rec.equipId,
-          numeroCertificado:"GAR-"+rec.numero,
+          numeroCertificado:"GAR-"+String(rec.id).replace(/-/g,"").slice(0,12).toUpperCase(),
           dias:90,
           inicio:"",
           fim:"",
@@ -362,6 +362,117 @@ function App({ctx}){
       "https://wa.me/55"+numero+"?text="+encodeURIComponent(texto),
       "_blank"
     );
+  };
+
+  /* ============ CERTIFICADO DE GARANTIA EM PDF ============ */
+
+  const gerarCertificadoPDF = r => {
+    const cliente = db.clientes.find(c => c.id === r.clienteId) || {};
+    const equipamento = db.equipamentos.find(e => e.id === r.equipamentoId) || {};
+    const ordem = db.ordens.find(o => o.id === r.osId) || {};
+    const empresa = ctx.company?.name || "Assistência técnica";
+
+    const esc = v => String(v ?? "—").replace(/[&<>"']/g, c => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+      '"': "&quot;", "'": "&#39;"
+    }[c]));
+
+    const w = window.open("", "_blank");
+
+    if (!w) {
+      alert("Permita pop-ups para gerar o certificado.");
+      return;
+    }
+
+    const status = r.status === "active" ? "Ativa" :
+      r.status === "expired" ? "Expirada" :
+      r.status === "cancelled" ? "Cancelada" :
+      "Aguardando entrega";
+
+    const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Certificado ${esc(r.numeroCertificado)}</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;color:#1f2937;padding:30px}
+.doc{max-width:800px;margin:auto;border:1px solid #ddd;padding:35px}
+h1{text-align:center;color:#183b63;margin:35px 0}
+h2{font-size:14px;color:#183b63;border-bottom:1px solid #ddd;padding-bottom:8px;margin-top:25px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{font-size:12px;color:#64748b}
+.field b{display:block;color:#1f2937;font-size:14px;margin-top:5px}
+.terms{font-size:13px;line-height:1.6;white-space:pre-wrap}
+.top{display:flex;justify-content:space-between;border-bottom:3px solid #183b63;padding-bottom:20px}
+.brand{font-size:22px;font-weight:bold;color:#183b63}
+.number{text-align:right;font-size:12px}
+button{display:block;margin:0 auto 20px;padding:12px 20px;background:#183b63;color:white;border:0;border-radius:6px;cursor:pointer}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:70px;text-align:center;font-size:12px}
+.line{border-top:1px solid #555;padding-top:8px}
+footer{text-align:center;border-top:1px solid #ddd;margin-top:30px;padding-top:12px;font-size:10px}
+@media print{
+body{padding:0}
+.doc{border:0;padding:15px}
+button{display:none}
+@page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<button onclick="window.print()">Imprimir / Salvar como PDF</button>
+<main class="doc">
+<div class="top">
+<div><div class="brand">${esc(empresa)}</div>Certificado de garantia de serviço</div>
+<div class="number">CERTIFICADO<strong><br>${esc(r.numeroCertificado)}</strong></div>
+</div>
+
+<h1>CERTIFICADO DE GARANTIA</h1>
+
+<h2>DADOS DO CLIENTE</h2>
+<div class="grid">
+<div class="field">Cliente<b>${esc(cliente.nome)}</b></div>
+<div class="field">Telefone<b>${esc(cliente.telefone || cliente.whatsapp || "Não informado")}</b></div>
+</div>
+
+<h2>EQUIPAMENTO E SERVIÇO</h2>
+<div class="grid">
+<div class="field">Ordem de serviço<b>${esc(ordem.numero)}</b></div>
+<div class="field">Equipamento<b>${esc((equipamento.marca || "") + " " + (equipamento.modelo || ""))}</b></div>
+<div class="field">Tipo<b>${esc(equipamento.tipo)}</b></div>
+<div class="field">Técnico<b>${esc(ordem.tecnico)}</b></div>
+</div>
+
+<h2>PRAZO E VALIDADE</h2>
+<div class="grid">
+<div class="field">Prazo<b>${esc((r.dias || 90) + " dias")}</b></div>
+<div class="field">Situação<b>${esc(status)}</b></div>
+<div class="field">Início<b>${esc(r.inicio ? dt(r.inicio) : "A definir na entrega")}</b></div>
+<div class="field">Término<b>${esc(r.fim ? dt(r.fim) : "A definir na entrega")}</b></div>
+</div>
+
+<h2>SERVIÇO REALIZADO</h2>
+<div class="terms">${esc(r.descricao || "Serviço técnico conforme ordem de serviço.")}</div>
+
+<h2>TERMOS E CONDIÇÕES</h2>
+<div class="terms">${esc(r.termos || "Aplicam-se as condições legais de garantia previstas na legislação vigente.")}</div>
+
+<p class="terms">Este certificado não limita nem substitui os direitos assegurados ao consumidor pela legislação aplicável.</p>
+
+<div class="sign">
+<div class="line">Assinatura da assistência técnica</div>
+<div class="line">Assinatura do cliente</div>
+</div>
+
+<footer>Documento emitido pelo SmartGestão • ${esc(hoje().split("-").reverse().join("/"))}</footer>
+</main>
+</body>
+</html>`;
+
+    w.document.open();
+    w.document.write(html);
+    w.document.close();
+    w.focus();
   };
 
   const SOON={};
@@ -608,13 +719,22 @@ function App({ctx}){
           }
         ]}
         extra={r=>(
-          <button
-            className="btn s n"
-            type="button"
-            onClick={()=>enviarGarantiaWhatsApp(r)}
-          >
-            WhatsApp
-          </button>
+          <>
+            <button
+              className="btn s n"
+              type="button"
+              onClick={()=>gerarCertificadoPDF(r)}
+            >
+              Gerar certificado PDF
+            </button>
+            <button
+              className="btn s n"
+              type="button"
+              onClick={()=>enviarGarantiaWhatsApp(r)}
+            >
+              WhatsApp
+            </button>
+          </>
         )}
         onSave={r=>upsert("garantias",r)}
         onDel={id=>remove("garantias",id)}
@@ -873,3 +993,4 @@ function App({ctx}){
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<Root/>);
+```
